@@ -29,9 +29,9 @@ $(function() {
   function addParticipantsMessage (data) {
     var message = '';
     if (data.numUsers === 1) {
-      message += "there's 1 participant";
+      message += "現在の人数は 1 人です";
     } else {
-      message += "there are " + data.numUsers + " participants";
+      message += "現在の人数は " + data.numUsers + " 人です";
     }
     log(message);
   }
@@ -105,7 +105,7 @@ $(function() {
   // Adds the visual chat typing message
   function addChatTyping (data) {
     data.typing = true;
-    data.message = 'is typing';
+    data.message = 'が入力中';
     addChatMessage(data);
   }
 
@@ -249,13 +249,13 @@ $(function() {
 
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
-    log(data.username + ' joined');
+    log(data.username + ' が入室しました');
     addParticipantsMessage(data);
   });
 
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
-    log(data.username + ' left');
+    log(data.username + ' が退室しました');
     addParticipantsMessage(data);
     removeChatTyping(data);
   });
